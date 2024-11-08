@@ -8,3 +8,9 @@
 ```shell
 docker compose up --build 
 ```
+
+## Dry test
+```shell
+pip install -r requirements.txt
+python src/app.py
+```
