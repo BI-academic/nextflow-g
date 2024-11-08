@@ -23,7 +23,7 @@ EXPOSE 8000
 COPY src/ /code
 
 # Initialize the SQLite3 database using the SQL file
-RUN sqlite3 /code/nextflow_g.db < /code/db/initial.sql
+RUN sqlite3 /code/db/nextflow_g.db < /code/db/initial.sql
 
 # Command to run the application with Gunicorn
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:create_app()"]

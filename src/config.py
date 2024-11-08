@@ -12,17 +12,22 @@ class DevelopmentConfig(Config):
     DEBUG = True
     # Add additional development-specific settings
 
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
+
 class TestingConfig(Config):
     """Testing configuration."""
     TESTING = True
     DEBUG = True
     # Add additional testing-specific settings
 
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
+
 class ProductionConfig(Config):
     """Production configuration."""
     DEBUG = False
     # Add additional production-specific settings
 
-class SqlliteConfig(Config):
     basedir = os.path.abspath(os.path.dirname(__file__))
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
