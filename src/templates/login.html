@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Login</title>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nextflow-G | Login</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
 <body>
-    <h1>Login</h1>
-    <div class="flashes">
-        {% for message in get_flashed_messages() %}
-          {{ message }}
-        {% endfor %}
-    </div>
+    <!--Bootstrap script-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!--Login form-->
     <form method="post">
         <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-        <input type="submit" value="Login">
+        <div class="d-flex justify-content-center align-items-center vh-100">
+            <div class="card text-center border-dark mb-3" style="width: 350px;">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    
+                    <!--Flash in login box-->
+                    <div class="flashes">
+                        {% for category, message in get_flashed_messages(with_categories=true) %}
+                            <div class="alert alert-{{category | safe }} alert-dismissible fade show" role="alert">
+                                <div>{{message}}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!--Actual Login boxes-->
+                    <h5 class="card-title">Welcome to Nextflow-G</h5>
+                    <p class="card-text">Open source GUI application for controlling Nextflow pipeline.</p>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">PW</span>
+                        <input type="text" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2" required>
+                    </div>
+
+                    <input class="btn btn-primary" type="submit" value="Login">
+                    <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>.</p>
+                </div>
+            </div>
+        </div>
     </form>
-    <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>.</p>
 </body>
 </html>

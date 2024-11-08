@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from models import User
@@ -19,11 +19,9 @@ def register():
         password = request.form['password']
         email = request.form['email']
 
-        print(username, password)
-
         # Check if the username already exists
         existing_user = User.query.filter_by(username=username).first()
-        print(existing_user)
+        current_app.logger.info(f"existed user: {existing_user.username}")
 
         if existing_user:
             flash('Username already exists. Please choose another one.', 'danger')
@@ -48,9 +46,10 @@ def login():
         password = request.form['password']
 
         # Check if the user exists
-        user = User.query.filter_by(username='example_user').first()
+        user = User.query.filter_by(username=username).first()
+        print(user)
         if user:
-            print(user.email)
+            current_app.logger.info(f"user email: {user.email}")
 
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.username

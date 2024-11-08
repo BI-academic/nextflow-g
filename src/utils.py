@@ -1,15 +1,15 @@
 from functools import wraps
-from flask import session, flash, redirect, url_for
+from flask import session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+db = SQLAlchemy() # DB init for app
 
 # Custom decorator to require login
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if 'user_id' not in session:
-            flash('You need to be logged in to access this page.', 'danger')
-            return redirect(url_for('auth.login'))  # Change 'auth.login' to your login route if needed
+            flash('You must be logged in to access this page.', 'warning')
+            return redirect(url_for('auth.login'))
         return f(*args, **kwargs)
     return decorated_function
