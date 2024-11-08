@@ -47,9 +47,8 @@ def login():
 
         # Check if the user exists
         user = User.query.filter_by(username=username).first()
-        print(user)
         if user:
-            current_app.logger.info(f"user email: {user.email}")
+            current_app.logger.info(f"Login user email: {user.email}")
 
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.username
