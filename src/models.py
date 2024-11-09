@@ -7,6 +7,7 @@ class Pipeline(db.Model):
     pipeline_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     pipeline_name = db.Column(db.String, nullable=False)
     pipeline_version = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
     
     # Relationship for easy access
     running_states = db.relationship('RunningState', backref='pipeline', lazy=True)
