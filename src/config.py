@@ -31,3 +31,14 @@ class ProductionConfig(Config):
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
+
+class PipelinesConfig(Config):
+    """Production configuration."""
+    DEBUG = False
+    # Add additional production-specific settings
+     
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
+    UPLOAD_FOLDER = basedir + '/path/to/the/uploads'
+    ALLOWED_EXTENSIONS = {'zip'}
+    MAX_CONTENT_LENGTH = 16 * 1000 * 1000 #  16 MB limit
