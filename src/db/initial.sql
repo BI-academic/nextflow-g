@@ -1,7 +1,10 @@
 CREATE TABLE pipeline (
     pipeline_id INTEGER PRIMARY KEY AUTOINCREMENT,
     pipeline_name TEXT NOT NULL,
-    pipeline_version TEXT NOT NULL
+    pipeline_version TEXT NOT NULL,
+    pipeline_description TEXT NOT NULL,
+    pipeline_file_path TEXT NOT NULL,
+    pipeline_main_nf TEXT NOT NULL
 );
 CREATE TABLE running_state (
     run_id INTEGER PRIMARY KEY AUTOINCREMENT,
