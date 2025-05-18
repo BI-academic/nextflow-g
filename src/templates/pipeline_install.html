@@ -13,26 +13,31 @@
     </div>
 
     <div class="row">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Pipeline Name</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="e.g) RNASeq">
+                <label for="pipeline_name" class="form-label">Pipeline Name</label>
+                <input type="text" class="form-control" name="pipeline_name" placeholder="e.g) RNASeq" required>
             </div>
             
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Pipeline Version</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="e.g) v1.2, 1.2">
+                <label for="pipeline_version" class="form-label">Pipeline Version</label>
+                <input type="text" class="form-control" name="pipeline_version" placeholder="e.g) v1.2, 1.2" required>
             </div>
             
             <div class="mb-3">
-                <label for="formFile" class="form-label">Pipeline code zip file(.zip)</label>
-                <input class="form-control" type="file" id="formFile">
+                <label for="pipeline_file" class="form-label">Pipeline code zip file(.zip)</label>
+                <input class="form-control" type="file" name="pipeline_file" accept=".zip" required>
             </div>
 
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <label for="pipeline_main_nf" class="form-label">Pipeline main file(.nf)</label>
+                <input  type="text" class="form-control" name="pipeline_main_nf" accept=".nf" placeholder="e.g) some_path/main.nf or main.nf" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="pipeline_description" class="form-label">Description</label>
+                <textarea class="form-control" name="pipeline_description" rows="2" required></textarea>
             </div>
             <input class="btn btn-primary" type="submit" value="Submit">
             <a type="button" class="btn btn-primary" href="{{ url_for('pipelines.pipelines_list' )}}">Back</a>

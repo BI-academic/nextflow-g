@@ -1,11 +1,14 @@
 services:
   web:
     build: ./
+    container_name: local_backend    
     ports:
       - "8000:8000"
     environment:
-      - FLASK_ENV=${FLASK_ENV}
-    volumes:
-      - ${HOST_PATH}:/app/pipelines
+      - FLASK_ENV=${FLASK_ENV:-development}
+    volumes:   
+      - ${HOST_INPUT_PATH:-../envdev/apps_input}:/app/input
+      - ${HOST_OUTPUT_PATH:-../envdev/apps_output}:/app/output
+      - ${HOST_REFERENTH_PATH:-../envdev/apps_data}:/app/data
   # redis:
   #   image: "redis:alpine"

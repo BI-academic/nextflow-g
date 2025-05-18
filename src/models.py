@@ -5,9 +5,11 @@ from datetime import datetime
 class Pipeline(db.Model):
     __tablename__ = 'pipeline'
     pipeline_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    pipeline_name = db.Column(db.String, nullable=False)
-    pipeline_version = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    pipeline_name = db.Column(db.String(100), nullable=False)
+    pipeline_version = db.Column(db.String(50), nullable=False)
+    pipeline_description = db.Column(db.String(255), nullable=False)
+    pipeline_file_path = db.Column(db.String(255), nullable=False)
+    pipeline_main_nf = db.Column(db.String(255), nullable=False)
     
     # Relationship for easy access
     running_states = db.relationship('RunningState', backref='pipeline', lazy=True)

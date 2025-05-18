@@ -14,6 +14,10 @@ class DevelopmentConfig(Config):
 
     basedir = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db/nextflow_g.db')
+    UPLOAD_FOLDER = basedir + '/../app/input/'
+    LOCAL_UPLOAD_FOLDER = basedir + '/../../envdev/apps_input/'  
+    ALLOWED_EXTENSIONS = {'zip'}
+    MAX_CONTENT_LENGTH = 16 * 1000 * 1000 #  16 MB limit
 
 class TestingConfig(Config):
     """Testing configuration."""
